@@ -33,7 +33,20 @@ void setup() {
   // put your setup code here, to run once:
   uint16_t ID = tft.readID();
   tft.begin(ID); 
+  tft.setRotation(1);
   tft.fillScreen(BLACK);
+  tft.setCursor(0,0);
+  tft.setTextColor(GREEN);
+  tft.setTextSize(10);
+  tft.println("KK");
+  tft.setCursor(300,0);
+  tft.setTextSize(7);
+  tft.setTextColor(RED);
+  tft.println("M1");
+  tft.setCursor(300,80);
+  tft.println("M2");
+  tft.setCursor(300,160);
+  tft.println("M3");
 }
 
 void loop() {
