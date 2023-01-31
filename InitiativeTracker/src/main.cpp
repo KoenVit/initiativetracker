@@ -2,12 +2,10 @@
 #include "Adafruit_GFX.h"
 #include "MCUFRIEND_kbv.h"
 
-#include "Fonts/FreeSans9pt7b.h"
-#include "Fonts/FreeSansOblique9pt7b.h"
 #include "Fonts/FreeSans12pt7b.h"
-#include "Fonts/FreeSerif12pt7b.h"
-#include "FreeDefaultFonts.h"
 
+#define X_SIZE 240
+#define Y_SIZE 400
 #define BLACK 0x0000
 #define NAVY 0x000F
 #define DARKGREEN 0x03E0
@@ -28,35 +26,21 @@
 #define GREENYELLOW 0xAFE5
 #define PINK 0xF81F
 
-MCUFRIEND_kbv tft(A3, A2, A1, A0, A4);  
-int16_t x0, y0, x1, y1, x2, y2, x3, y3;
-uint16_t w0, h0, w1, h1;
+MCUFRIEND_kbv tft(A3, A2, A1, A0, A4);
 
 void InitiativeScreen();
-void StartTimer();
 void SetTurns(String currentInitials, String initials1, String initials2, String initials3);
 uint16_t* placeTextInCenter(const String &textBuf, uint16_t x, uint16_t y, uint8_t textSize, uint16_t textColor);
+void SetTime(int seconds);
 
 void setup() 
 {
+  Serial.begin(9600);
   uint16_t ID = tft.readID();
   tft.begin(ID); 
   InitiativeScreen();
-  /*tft.setRotation(1);
-  tft.fillScreen(BLACK);
-  tft.setCursor(0,0);
-  tft.setTextColor(GREEN);
-  tft.setTextSize(10);
-  tft.println("KK");
-  tft.setCursor(300,0);
-  tft.setTextSize(7);
-  tft.setTextColor(RED);
-  tft.println("01");
-  tft.setCursor(300,80);
-  tft.println("02");
-  tft.setTextColor(GREEN);
-  tft.setCursor(300,160);
-  tft.println("SB");*/
+  SetTurns("KK", "MB", "DR", "JB");
+  SetTime(9);
 }
 
 void loop() 
@@ -67,30 +51,32 @@ void loop()
 void InitiativeScreen()
 {
   tft.fillScreen(0x08A7);
-  tft.fillRect(0, 337, 240, 63, WHITE);
-  tft.drawFastHLine(29, 130, 181, WHITE);
-  SetTurns("KK", "MB", "DR", "JB");
-}
-
-void StartTimer()
-{
-
+  tft.fillRect(0, 337, X_SIZE, 63, WHITE);
+  tft.drawFastHLine(0, 130, 240, WHITE);
 }
 
 void SetTurns(String currentInitials, String initials1, String initials2, String initials3)
 {
   tft.setTextWrap(false);
-  placeTextInCenter(currentInitials, 120, 79, 13, YELLOW);
-  placeTextInCenter(initials1, 120, 172, 8, WHITE);
-  placeTextInCenter(initials2, 120, 237, 8, WHITE);
-  placeTextInCenter(initials3, 120, 302, 8, WHITE);
-  placeTextInCenter("00:23", 120, 368, 4, BLACK);
+  placeTextInCenter(currentInitials, X_SIZE / 2, 150, 5, YELLOW);
+  placeTextInCenter(initials1, X_SIZE / 2, 220, 3, WHITE);
+  placeTextInCenter(initials2, X_SIZE / 2, 285, 3, WHITE);
+  placeTextInCenter(initials3, X_SIZE / 2, 350, 3, WHITE);
+}
+
+void SetTime(int seconds)
+{
+  int minutes = seconds / 60;
+  seconds %= 60;
+  char timeString[10];
+  sprintf(timeString, "%02d:%02d", minutes, seconds);
+  placeTextInCenter(timeString, X_SIZE / 2, 398, 2, BLACK);
 }
 
 uint16_t* placeTextInCenter(const String &textBuf, uint16_t x, uint16_t y, uint8_t textSize, uint16_t textColor){
     int16_t x1, y1;
     static uint16_t size[2] = {0, 0};
-    //tft.setFont(&FreeSans12pt7b);
+    tft.setFont(&FreeSans12pt7b);
     tft.setTextSize(textSize);
     tft.setTextColor(textColor);
     tft.getTextBounds(textBuf, x, y, &x1, &y1, &size[0], &size[1]);
