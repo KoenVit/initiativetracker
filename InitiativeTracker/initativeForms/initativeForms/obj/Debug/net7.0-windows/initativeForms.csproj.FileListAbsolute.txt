@@ -4,7 +4,6 @@ C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\inita
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\bin\Debug\net7.0-windows\initativeForms.dll
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\bin\Debug\net7.0-windows\initativeForms.pdb
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.csproj.AssemblyReference.cache
-C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.Form1.resources
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.csproj.GenerateResource.cache
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.AssemblyInfoInputs.cache
@@ -15,3 +14,4 @@ C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\inita
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.pdb
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.genruntimeconfig.cache
 C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\ref\initativeForms.dll
+C:\Users\Koen\Documents\initiativetracker\InitiativeTracker\initativeForms\initativeForms\obj\Debug\net7.0-windows\initativeForms.initiativeTrackerForm.resources
