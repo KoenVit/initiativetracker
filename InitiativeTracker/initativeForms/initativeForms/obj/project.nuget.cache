@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "lfzRwPwYMnzA4t1HBoPuy5EZbF3b7+djGCtYuCkdbnejeFCWY3L0oX23rd/cKcdYbXGD3YlDkIp4952OiawoWw==",
+  "dgSpecHash": "gKGGsFJ7w6Tu6/nxG4aEObmaUeXG2ZtlmnTKJJXnAo9kBx5bhpiDVBp/AYxTDVSQp1cyO+NkJSNc64KMGp3Y5g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Koen\\Documents\\initiativetracker\\InitiativeTracker\\initativeForms\\initativeForms\\initativeForms.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.native.system.io.ports\\7.0.0\\runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\Koen\\.nuget\\packages\\system.io.ports\\7.0.0\\system.io.ports.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

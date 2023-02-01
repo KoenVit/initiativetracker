@@ -44,9 +44,12 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.connectButton = new System.Windows.Forms.Button();
             this.connectionLabel = new System.Windows.Forms.Label();
-            this.listBox = new System.Windows.Forms.ListBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.initiativeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.initiativeNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemyNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // initiativeLabel
@@ -123,9 +126,9 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(12, 159);
+            this.addButton.Location = new System.Drawing.Point(105, 159);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(169, 23);
+            this.addButton.Size = new System.Drawing.Size(76, 23);
             this.addButton.TabIndex = 8;
             this.addButton.Text = "Add to list";
             this.addButton.UseVisualStyleBackColor = true;
@@ -134,61 +137,63 @@
             // killButton
             // 
             this.killButton.Enabled = false;
-            this.killButton.Location = new System.Drawing.Point(13, 274);
+            this.killButton.Location = new System.Drawing.Point(187, 297);
             this.killButton.Name = "killButton";
-            this.killButton.Size = new System.Drawing.Size(168, 23);
+            this.killButton.Size = new System.Drawing.Size(162, 23);
             this.killButton.TabIndex = 10;
             this.killButton.Text = "Kill";
             this.killButton.UseVisualStyleBackColor = true;
+            this.killButton.Click += new System.EventHandler(this.killButton_Click);
             // 
             // nextButton
             // 
-            this.nextButton.Enabled = false;
-            this.nextButton.Location = new System.Drawing.Point(14, 245);
+            this.nextButton.Location = new System.Drawing.Point(12, 188);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(167, 23);
+            this.nextButton.Size = new System.Drawing.Size(87, 23);
             this.nextButton.TabIndex = 11;
             this.nextButton.Text = "Next turn";
             this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
             // 
             // startButton
             // 
-            this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(13, 216);
+            this.startButton.Location = new System.Drawing.Point(12, 159);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(168, 23);
+            this.startButton.Size = new System.Drawing.Size(87, 23);
             this.startButton.TabIndex = 12;
             this.startButton.Text = "Start combat";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // resetButton
             // 
-            this.resetButton.Enabled = false;
-            this.resetButton.Location = new System.Drawing.Point(13, 326);
+            this.resetButton.Location = new System.Drawing.Point(12, 217);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(168, 23);
+            this.resetButton.Size = new System.Drawing.Size(169, 23);
             this.resetButton.TabIndex = 13;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // removeButton
             // 
-            this.removeButton.Enabled = false;
             this.removeButton.Location = new System.Drawing.Point(187, 326);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(196, 23);
+            this.removeButton.Size = new System.Drawing.Size(162, 23);
             this.removeButton.TabIndex = 15;
             this.removeButton.Text = "Remove from list";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // connectButton
             // 
             this.connectButton.Location = new System.Drawing.Point(109, 5);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(274, 23);
+            this.connectButton.Size = new System.Drawing.Size(240, 23);
             this.connectButton.TabIndex = 16;
             this.connectButton.Text = "Connect to Arduino";
             this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // connectionLabel
             // 
@@ -199,21 +204,43 @@
             this.connectionLabel.TabIndex = 17;
             this.connectionLabel.Text = "Not connected!";
             // 
-            // listBox
+            // dataGridView1
             // 
-            this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 15;
-            this.listBox.Location = new System.Drawing.Point(187, 43);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(196, 274);
-            this.listBox.TabIndex = 18;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameColumn,
+            this.initiativeColumn});
+            this.dataGridView1.Location = new System.Drawing.Point(186, 41);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(163, 250);
+            this.dataGridView1.TabIndex = 18;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.HeaderText = "Name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 60;
+            // 
+            // initiativeColumn
+            // 
+            this.initiativeColumn.HeaderText = "Initiative";
+            this.initiativeColumn.Name = "initiativeColumn";
+            this.initiativeColumn.ReadOnly = true;
+            this.initiativeColumn.Width = 60;
             // 
             // initiativeTrackerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 354);
-            this.Controls.Add(this.listBox);
+            this.ClientSize = new System.Drawing.Size(357, 354);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.connectionLabel);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.removeButton);
@@ -235,6 +262,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.initiativeNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.enemyNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,6 +286,8 @@
         private Button removeButton;
         private Button connectButton;
         private Label connectionLabel;
-        private ListBox listBox;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn nameColumn;
+        private DataGridViewTextBoxColumn initiativeColumn;
     }
 }
