@@ -41,7 +41,6 @@
             this.nextButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
             this.connectButton = new System.Windows.Forms.Button();
             this.connectionLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -136,12 +135,11 @@
             // 
             // killButton
             // 
-            this.killButton.Enabled = false;
             this.killButton.Location = new System.Drawing.Point(187, 297);
             this.killButton.Name = "killButton";
             this.killButton.Size = new System.Drawing.Size(162, 23);
             this.killButton.TabIndex = 10;
-            this.killButton.Text = "Kill";
+            this.killButton.Text = "Kill / Remove from list";
             this.killButton.UseVisualStyleBackColor = true;
             this.killButton.Click += new System.EventHandler(this.killButton_Click);
             // 
@@ -174,16 +172,6 @@
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // removeButton
-            // 
-            this.removeButton.Location = new System.Drawing.Point(187, 326);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(162, 23);
-            this.removeButton.TabIndex = 15;
-            this.removeButton.Text = "Remove from list";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // connectButton
             // 
@@ -239,11 +227,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 354);
+            this.ClientSize = new System.Drawing.Size(357, 327);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.connectionLabel);
             this.Controls.Add(this.connectButton);
-            this.Controls.Add(this.removeButton);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.nextButton);
@@ -283,7 +270,6 @@
         private Button nextButton;
         private Button startButton;
         private Button resetButton;
-        private Button removeButton;
         private Button connectButton;
         private Label connectionLabel;
         private DataGridView dataGridView1;

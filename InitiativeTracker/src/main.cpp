@@ -31,7 +31,7 @@ MCUFRIEND_kbv tft(A3, A2, A1, A0, A4);
 void InitiativeScreen();
 void SetTurns(String currentInitials, String initials1, String initials2, String initials3);
 uint16_t* placeTextInCenter(const String &textBuf, uint16_t x, uint16_t y, uint8_t textSize, uint16_t textColor);
-void SetTime(int seconds);
+//void SetTime(int seconds);
 void ReadMessage();
 
 void setup() 
@@ -64,14 +64,14 @@ void SetTurns(String currentInitials, String initials1, String initials2, String
   placeTextInCenter(initials3, X_SIZE / 2, 350, 3, WHITE);
 }
 
-void SetTime(int seconds)
+/*void SetTime(int seconds)
 {
   int minutes = seconds / 60;
   seconds %= 60;
   char timeString[10];
   sprintf(timeString, "%02d:%02d", minutes, seconds);
   placeTextInCenter(timeString, X_SIZE / 2, 398, 2, BLACK);
-}
+}*/
 
 uint16_t* placeTextInCenter(const String &textBuf, uint16_t x, uint16_t y, uint8_t textSize, uint16_t textColor){
     int16_t x1, y1;
@@ -115,11 +115,10 @@ void ReadMessage()
       if (receivedChars[0] == 'C' && receivedChars[1] == '?' && receivedChars[2] == '\0')
       {
         Serial.println('@');
-        SetTurns("KK", "MB", "DR", "JB");
-        SetTime(9);
+        //SetTime(9);
       }
-      // Receive next turn command
-      else if(receivedChars[0] == 'N' && receivedChars[1] == 'T' && receivedChars[2] == ':' && receivedChars[11] == '\0')
+      // Receive next four turns command
+      else if(receivedChars[0] == 'N' && receivedChars[1] == '4' && receivedChars[2] == ':' && receivedChars[11] == '\0')
       {
         char turnOne[3];
         char turnTwo[3];
@@ -146,6 +145,63 @@ void ReadMessage()
         turnThree[2] = '\0';
         turnFour[2] = '\0';
         SetTurns(String(turnOne), String(turnTwo), String(turnThree), String(turnFour));
+        Serial.println("@");
+      }
+
+      // Receive next three turns command
+      else if(receivedChars[0] == 'N' && receivedChars[1] == '3' && receivedChars[2] == ':' && receivedChars[9] == '\0')
+      {
+        char turnOne[3];
+        char turnTwo[3];
+        char turnThree[3];
+        for(int i = 0; i < 2; i++)
+        {
+          turnOne[i] = receivedChars[i+3];
+        }
+        for(int i = 0; i < 2; i++)
+        {
+          turnTwo[i] = receivedChars[i+5];
+        }
+        for(int i = 0; i < 2; i++)
+        {
+          turnThree[i] = receivedChars[i+7];
+        }
+        turnOne[2] = '\0';
+        turnTwo[2] = '\0';
+        turnThree[2] = '\0';
+        SetTurns(String(turnOne), String(turnTwo), String(turnThree), "  ");
+        Serial.println("@");
+      }
+
+      // Receive next two turns command
+      else if(receivedChars[0] == 'N' && receivedChars[1] == '2' && receivedChars[2] == ':' && receivedChars[7] == '\0')
+      {
+        char turnOne[3];
+        char turnTwo[3];
+        for(int i = 0; i < 2; i++)
+        {
+          turnOne[i] = receivedChars[i+3];
+        }
+        for(int i = 0; i < 2; i++)
+        {
+          turnTwo[i] = receivedChars[i+5];
+        }
+        turnOne[2] = '\0';
+        turnTwo[2] = '\0';
+        SetTurns(String(turnOne), String(turnTwo), "  ", "  ");
+        Serial.println("@");
+      }
+
+      // Receive next four turns command
+      else if(receivedChars[0] == 'N' && receivedChars[1] == '1' && receivedChars[2] == ':' && receivedChars[5] == '\0')
+      {
+        char turnOne[3];
+        for(int i = 0; i < 2; i++)
+        {
+          turnOne[i] = receivedChars[i+3];
+        }
+        turnOne[2] = '\0';
+        SetTurns(String(turnOne), "  ", "  ", "  ");
         Serial.println("@");
       }
 

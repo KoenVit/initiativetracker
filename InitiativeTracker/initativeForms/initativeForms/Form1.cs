@@ -1,6 +1,7 @@
 using System;
 using System.Data.Common;
 using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace initativeForms
 {
@@ -14,6 +15,80 @@ namespace initativeForms
             InitializeComponent();
         }
 
+        private string CreateMessage()
+        {
+            string message = "N";
+            if (dataGridView1.Rows.Count > 0)
+            {
+                if (dataGridView1.Rows.Count < 4)
+                {
+                    message += dataGridView1.Rows.Count + ":";
+                }
+                else
+                {
+                    message += "4:";
+                }
+
+                int i = 0;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    message += row.Cells[0].Value.ToString();
+                    i++;
+                    if (i >= 4)
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please add more players");
+            }
+            return message;
+        }
+
+        private void SortInitiative()
+        {
+            dataGridView1.Sort(dataGridView1.Columns["initiativeColumn"], System.ComponentModel.ListSortDirection.Descending);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[0].Selected = true;
+        }
+
+        private void SendToArduino(string message)
+        {
+            if (connection != null && connection.Port != null)
+            {
+                try
+                {
+                    connection.Port.Open();
+                    connection.Port.WriteLine(message);
+                    string readData = connection.Port.ReadLine();
+                    if (!readData.Contains('@'))
+                    {
+                        MessageBox.Show("Could not update");
+                    }
+                }
+                catch (InvalidOperationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+                catch (IOException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    connectionLabel.Text = "Not connected!";
+                }
+                finally
+                {
+                    connection.Port.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No connection with Arduino");
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -21,11 +96,11 @@ namespace initativeForms
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            if(typeCombobox.SelectedIndex == 0)
+            if (typeCombobox.SelectedIndex == 0)
             {
                 if (initialTextbox.Text.Length == 2)
                 {
-                    dataGridView1.Rows.Add(initialTextbox.Text, initiativeNumeric.Value);
+                    dataGridView1.Rows.Add(initialTextbox.Text.ToUpper(), initiativeNumeric.Value);
                 }
                 else
                 {
@@ -33,24 +108,23 @@ namespace initativeForms
                     return;
                 }
             }
-            else if(typeCombobox.SelectedIndex == 1)
+            else if (typeCombobox.SelectedIndex == 1)
             {
                 dataGridView1.Rows.Add(enemyNumeric.Value, initiativeNumeric.Value);
             }
-            dataGridView1.Sort(dataGridView1.Columns["initiativeColumn"], System.ComponentModel.ListSortDirection.Descending);
-            dataGridView1.ClearSelection();
-            dataGridView1.Rows[0].Selected = true;
         }
 
         private void typeCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (typeCombobox.SelectedIndex) 
+            switch (typeCombobox.SelectedIndex)
             {
-                case 0: initialTextbox.Enabled = true;
+                case 0:
+                    initialTextbox.Enabled = true;
                     enemyNumeric.Enabled = false;
                     initiativeNumeric.Enabled = true;
                     break;
-                case 1: enemyNumeric.Enabled = true;
+                case 1:
+                    enemyNumeric.Enabled = true;
                     initialTextbox.Enabled = false;
                     initiativeNumeric.Enabled = true;
                     break;
@@ -103,50 +177,14 @@ namespace initativeForms
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            if (connection != null && connection.Port != null)
-            {
-                try
-                {
-                    connection.Port.Open();
-                    connection.Port.WriteLine("NT:AABBCCDD");
-                    string readData = connection.Port.ReadLine();
-                    if (!readData.Contains('@'))
-                    {
-                        MessageBox.Show("Could not update");
-                    }
-                }
-                catch (InvalidOperationException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
-                catch (IOException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    connectionLabel.Text = "Not connected!";
-                }
-                finally
-                {
-                    connection.Port.Close();
-                }
-            }
+            DataGridViewRow row= dataGridView1.Rows[0];
+            dataGridView1.Rows.RemoveAt(0);
+            dataGridView1.Rows.Add(row);
+
+            SendToArduino(CreateMessage());
         }
 
         private void killButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void startButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void removeButton_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -159,6 +197,26 @@ namespace initativeForms
             {
                 MessageBox.Show("Please select the whole row");
             }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure?", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                dataGridView1.Rows.Clear();
+                startButton.Enabled = true;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            SortInitiative();
+            SendToArduino(CreateMessage());
+            startButton.Enabled = false;
         }
     }
 }
